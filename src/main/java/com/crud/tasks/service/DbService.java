@@ -24,8 +24,6 @@ public class DbService {
         return repository.save(task);
     }
     public void deleteTask(Long taskId) throws TaskNotFoundException {
-        Task task = getTask(taskId);
-        repository.delete(task);
+        repository.deleteById(taskId);
     }
-
 }
