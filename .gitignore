@@ -13,6 +13,12 @@ build/
 .settings
 .springBeans
 .sts4-cache
+.breakpoints
+.replit
+Main.class
+target/
+replit.nix
+pom.xml
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
