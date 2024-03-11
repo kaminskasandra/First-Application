@@ -29,6 +29,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.16.1'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
