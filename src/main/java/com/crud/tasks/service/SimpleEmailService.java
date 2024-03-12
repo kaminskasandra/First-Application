@@ -33,10 +33,10 @@ public class SimpleEmailService {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
 
-        String toCc = mail.getToCc();
-        if (!toCc.isEmpty()) {
-            mailMessage.setCc(toCc);
-        }
+//        String toCc = mail.getToCc();
+//        if (!toCc.isEmpty()) {
+//            mailMessage.setCc(toCc);
+//        }
         return mailMessage;
     }
 }
