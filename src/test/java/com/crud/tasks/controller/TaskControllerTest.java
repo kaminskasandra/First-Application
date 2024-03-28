@@ -5,7 +5,9 @@ import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,19 +46,22 @@ public class TaskControllerTest {
     public void testCreateTask() throws Exception {
 
         //Given
-        TaskDto taskDto = new TaskDto();
-        taskDto.setId(1L);
-        Task task = new Task();
-        task.setId(1L);
+        Task taskToSave = new Task(1L, "Task - update", "Update test task");
 
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
-        when(dbService.saveTask(task)).thenReturn(task);
+        when(taskMapper.mapToTask((ArgumentMatchers.any(TaskDto.class)))).thenReturn(taskToSave);
+        when(dbService.saveTask((ArgumentMatchers.any(Task.class)))).thenReturn(taskToSave);
+
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(taskToSave);
 
         //When & Then
-        mockMvc.perform(MockMvcRequestBuilders.post("/v1/tasks")
+        mockMvc.perform(post("/v1/tasks")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\":1}"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                        .characterEncoding("UTF-8")
+                        .content(jsonContent))
+                .andExpect(status().isOk());
+        verify(dbService, times(1)).saveTask(taskToSave);
+        verifyNoMoreInteractions(dbService);
     }
 
     @Test
@@ -64,18 +69,19 @@ public class TaskControllerTest {
 
         //Given
         Long taskId = 1L;
-        Task task = new Task(taskId, "Test", "Content");
-        TaskDto taskDto = new TaskDto(taskId, "Test", "Content");
+        Task task = new Task(taskId, "Task", "Test");
+        TaskDto taskDto = new TaskDto(taskId, "Task", "Test");
         when(dbService.getTask(taskId)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
 
         //When & Then
-        mockMvc.perform(get("/v1/tasks/{taskId}", taskId)
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/v1/tasks/{taskId}", taskId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("$.id").value(taskId))
-                .andExpect(jsonPath("$.title").value("Test"))
-                .andExpect(jsonPath("$.content").value("Content"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(taskId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Task"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Test"));
     }
 
     @Test
