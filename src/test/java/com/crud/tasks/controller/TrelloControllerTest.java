@@ -29,6 +29,7 @@ public class TrelloControllerTest {
 
     @Test
     public void createTrelloCardTest() throws Exception {
+
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto();
         trelloCardDto.setName("Test Card");
@@ -67,8 +68,11 @@ public class TrelloControllerTest {
 
     @Test
     public void testGetEmptyTrelloBoards() throws Exception {
+
+        //Given
         when(trelloFacade.fetchTrelloBoards()).thenReturn(Collections.emptyList());
 
+        //When & Then
         mockMvc.perform(MockMvcRequestBuilders.get("/v1/trello/boards")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

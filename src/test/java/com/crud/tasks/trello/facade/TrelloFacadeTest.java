@@ -36,6 +36,7 @@ class TrelloFacadeTest {
 
     @Test
     void shouldFetchEmptyList() {
+
         // Given
         List<TrelloListDto> trelloLists =
                 List.of(new TrelloListDto("1", "test_list", false));
@@ -61,8 +62,10 @@ class TrelloFacadeTest {
         assertNotNull(trelloBoardDtos);
         assertEquals(0, trelloBoardDtos.size());
     }
+
     @Test
     void shouldFetchTrelloBoards() {
+
         // Given
         List<TrelloListDto> trelloLists =
                 List.of(new TrelloListDto("1", "test_list", false));

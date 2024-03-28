@@ -108,6 +108,7 @@ public class TaskControllerTest {
 
     @Test
     public void testEmptyListOfTasks() throws Exception {
+
         //Given
         List<TaskDto> taskDtoList = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
@@ -122,6 +123,7 @@ public class TaskControllerTest {
 
     @Test
     public void testUpdateTask() throws Exception {
+
         //Given
         Task task = new Task();
         task.setId(1L);
