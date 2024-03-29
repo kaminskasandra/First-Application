@@ -30,10 +30,12 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.google.code.gson:gson'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.16.1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+	implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+
 }
 
 tasks.named('test') {
