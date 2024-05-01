@@ -31,6 +31,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.google.code.gson:gson'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.16.1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
