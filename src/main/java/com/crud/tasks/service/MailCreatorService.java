@@ -38,6 +38,19 @@ public class MailCreatorService {
         context.setVariable("company_goal", adminConfig.getCompanyGoal());
         context.setVariable("show_button", false);
         context.setVariable("is_friend", false);
+        context.setVariable("admin_config", adminConfig);
         return templateEngine.process("mail/created-trello-card-mail", context);
+    }
+    public String buildTasksAvailableInDatabaseEmail(String message) {
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("tasks_url", "http://localhost:8080/v1/tasks");
+        context.setVariable("button", "Visit website");
+        context.setVariable("show_button", true);
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("company_email", adminConfig.getCompanyEmail());
+        context.setVariable("company_phone", adminConfig.getCompanyPhone());
+        context.setVariable("company_goal", adminConfig.getCompanyGoal());
+        return templateEngine.process("mail/number-of-tasks-available-in-database", context);
     }
 }

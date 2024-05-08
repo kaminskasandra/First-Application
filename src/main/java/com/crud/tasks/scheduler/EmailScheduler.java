@@ -19,7 +19,7 @@ public class EmailScheduler {
     String version;
 
 
-    @Scheduled(cron = "0 0 10 * * *")
+    @Scheduled(cron = "0 0 9 * * *")
     public void sendInformationEmail() {
         long size = taskRepository.count();
         if (size == 1) {
